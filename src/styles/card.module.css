@@ -1,0 +1,55 @@
+.weatherCard {
+  width: 280px;
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08); /* translucent for glass effect */
+  backdrop-filter: blur(10px); /* blur background behind card */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* stronger shadow for dark bg */
+  font-family: "Segoe UI", sans-serif;
+  color: #f1f1f1; /* light text */
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.weatherCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+}
+
+.cityName {
+  margin: 0 0 12px 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff; /* slightly brighter for title */
+}
+
+.weatherMain {
+  font-size: 36px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fffae3; /* subtle warm color for temperature */
+}
+
+.condition {
+  font-size: 16px;
+  font-weight: 500;
+  color: #cfcfcf; /* secondary text */
+}
+
+.weatherDetails {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #d1d1d1;
+}
+
+.weatherDetails span {
+  font-weight: 600;
+  color: #ffffff;
+}
+.condition img {
+  vertical-align: middle; /* align with text */
+  margin-right: 6px; /* small gap between icon and text */
+}
