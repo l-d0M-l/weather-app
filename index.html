@@ -7,12 +7,16 @@
     <title>weather-app</title>
     
     <script type="module" src="./src/js/main.js" defer></script>
+    <link rel="stylesheet" href="./src/css/styles.css" />
+   <!-- Lucide Icons -->
+   <script src="https://unpkg.com/lucide@latest"></script>
   </head>
   <body>
 
     <div class="dashboard-wrapper">
       <!-- Sidebar Navigation -->
       <aside class="sidebar">
+        
           <div class="logo">
               <i data-lucide="cloud-sun"></i>
           </div>
@@ -29,9 +33,10 @@
           <!-- Top Search Bar -->
           <header class="top-bar">
               <div class="search-container">
-                  <form id="searchForm" class="search-form" onsubmit="event.preventDefault(); getWeather();">
+                  <form id="searchForm" class="search-form">
                       <i data-lucide="search"></i>
                       <input type="text" id="cityInput" placeholder="Search for cities..." autocomplete="off">
+                      <button type="submit" class="search-button">Search</button>
                   </form>
               </div>
           </header>
