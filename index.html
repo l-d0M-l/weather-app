@@ -1,52 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <!-- <link rel="icon" type="image/svg+xml" href="" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>weather-app</title>
-    
+
     <script type="module" src="./src/js/main.js" defer></script>
+    <link rel="stylesheet" href="./src/css/styles.css" />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
   </head>
   <body>
-
     <div class="dashboard-wrapper">
       <!-- Sidebar Navigation -->
       <aside class="sidebar">
-          <div class="logo">
-              <i data-lucide="cloud-sun"></i>
-          </div>
-          <nav class="nav">
-              <a href="#" class="nav-item active" title="Weather"><i data-lucide="layout-dashboard"></i></a>
-              <a href="#" class="nav-item" title="Cities"><i data-lucide="map-pin"></i></a>
-              <a href="#" class="nav-item" title="Map"><i data-lucide="map"></i></a>
-              <a href="#" class="nav-item" title="Settings"><i data-lucide="settings"></i></a>
-          </nav>
+        <div class="logo">
+          <i data-lucide="cloud-sun"></i>
+        </div>
+        <nav class="nav">
+          <a href="#" class="nav-item active" title="Weather"
+            ><i data-lucide="layout-dashboard"></i
+          ></a>
+          <a href="#" class="nav-item" title="Cities"
+            ><i data-lucide="map-pin"></i
+          ></a>
+          <a href="#" class="nav-item" title="Map"><i data-lucide="map"></i></a>
+          <a href="#" class="nav-item" title="Settings"
+            ><i data-lucide="settings"></i
+          ></a>
+        </nav>
       </aside>
 
       <!-- Main Dashboard Content -->
       <main class="main-content">
-          <!-- Top Search Bar -->
-          <header class="top-bar">
-              <div class="search-container">
-                  <form id="searchForm" class="search-form" onsubmit="event.preventDefault(); getWeather();">
-                      <i data-lucide="search"></i>
-                      <input type="text" id="cityInput" placeholder="Search for cities..." autocomplete="off">
-                  </form>
-              </div>
-          </header>
-
-          <div id="dashboardGrid" class="dashboard-grid">
-              <!-- Data will be populated here -->
-              <div class="loading-state">
-                  <p>Enter a city name above to view the weather dashboard.</p>
-              </div>
+        <!-- Top Search Bar -->
+        <header class="top-bar">
+          <div class="search-container">
+            <form id="searchForm" class="search-form">
+              <i data-lucide="search"></i>
+              <input
+                type="text"
+                id="cityInput"
+                placeholder="Search for cities..."
+                autocomplete="off"
+              />
+              <button type="submit" class="search-button">Search</button>
+            </form>
           </div>
-      </main>
-  <div id="app"></div>
-  </div>
+        </header>
 
+        <div id="dashboardGrid" class="dashboard-grid">
+          <!-- Data will be populated here -->
+          <!-- <div class="loading-state">
+                  <p>Enter a city name above to view the weather dashboard.</p>
+              </div> -->
+          <div id="app">
+            <div class="loading-state">
+              <p>Enter a city name above to view the weather dashboard.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
   </body>
 </html>
-<div>
-
+<div></div>

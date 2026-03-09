@@ -1,39 +1,44 @@
 import "../styles/style.css";
-import styles from "../styles/card.module.css";
-
 import fetchWeather from "./api/weatherAppApi";
-let weatherResult = await fetchWeather("edmonton");
-// returns {location:, current: }
-console.log(weatherResult.current);
-document.querySelector("#app").innerHTML = `
-  <div class="${styles.weatherCard}">
-    <h2 class="${styles.cityName}">${weatherResult.location.name}</h2>
+import renderInfo from "./renderElements";
+if (window.lucide) {
+  window.lucide.createIcons();
+}
 
-    <div class="${styles.weatherMain}">
-      <span class="temperature">${weatherResult.current.temp_c}°C</span>
-      <span class="${styles.condition}">
-        <img 
-          src="https:${weatherResult.current.condition.icon}" 
-          alt="${weatherResult.current.condition.text}" 
-          width="32" 
-          height="32"
-        />
-        ${weatherResult.current.condition.text}
-      </span>
-    </div>
+// 1. Create a function to handle the "State Change" and Re-render
+async function updateWeather(city) {
+  try {
+    const weatherResult = await fetchWeather(city);
 
-    <div class="${styles.weatherDetails}">
-      <p>
-        Feels like:
-        <span class="feels-like">${weatherResult.current.feelslike_c}°C</span>
-      </p>
-      <p>
-        Humidity:
-        <span class="humidity">${weatherResult.current.humidity}%</span>
-      </p>
-      <p>
-        Wind: <span class="wind">${weatherResult.current.wind_kph} km/h</span>
-      </p>
-    </div>
-  </div>
-`;
+    // SAVE: Store the successfully fetched city name
+    localStorage.setItem("lastSearchedCity", city);
+
+    render(weatherResult);
+  } catch (error) {
+    console.error("Failed to fetch weather:", error);
+  }
+}
+
+// 2. The Render Function (Your HTML logic)
+function render(data) {
+  console.log(data);
+
+  document.querySelector("#app").innerHTML = renderInfo(data);
+}
+
+// 3. Event Listener (The "Setter")
+const form = document.querySelector("#searchForm");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const city = e.target[0].value;
+  if (city) {
+    updateWeather(city);
+    e.target[0].value = ""; // Clear input after search
+  }
+
+  // updateWeather(city); // Triggers the "state" update
+});
+
+// 4. Initial Load (Initial State)
+const savedCity = localStorage.getItem("lastSearchedCity");
+updateWeather(savedCity || "");
