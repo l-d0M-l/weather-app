@@ -5,15 +5,46 @@ if (window.lucide) {
   window.lucide.createIcons();
 }
 
+// --- THEME LOGIC START ---
+const themeToggle = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+
+// 1. Function to apply theme changes
+const applyTheme = (theme) => {
+  const isLight = theme === "light";
+  document.documentElement.classList.toggle("light", isLight);
+  localStorage.setItem("theme", theme);
+
+  // Update the Icon: if screen is light, show moon icon to go dark
+  if (themeIcon) {
+    themeIcon.setAttribute("data-lucide", isLight ? "moon" : "sun");
+  }
+};
+
+// 2. Initialize Theme immediately
+const savedTheme = localStorage.getItem("theme") || "dark";
+applyTheme(savedTheme);
+
+// 3. Toggle Event Listener
+themeToggle?.addEventListener("click", () => {
+  const newTheme = document.documentElement.classList.contains("light")
+    ? "dark"
+    : "light";
+  applyTheme(newTheme);
+});
+// --- THEME LOGIC END ---
+
 // 1. Create a function to handle the "State Change" and Re-render
 async function updateWeather(city) {
   try {
-    const weatherResult = await fetchWeather(city);
+    if (city) {
+      const weatherResult = await fetchWeather(city);
 
-    // SAVE: Store the successfully fetched city name
-    localStorage.setItem("lastSearchedCity", city);
+      // SAVE: Store the successfully fetched city name
+      localStorage.setItem("lastSearchedCity", city);
 
-    render(weatherResult);
+      render(weatherResult);
+    }
   } catch (error) {
     console.error("Failed to fetch weather:", error);
   }
@@ -21,7 +52,7 @@ async function updateWeather(city) {
 
 // 2. The Render Function (Your HTML logic)
 function render(data) {
-  console.log(data);
+  // console.log(data);
 
   document.querySelector("#app").innerHTML = renderInfo(data);
 }

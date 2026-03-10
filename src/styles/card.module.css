@@ -3,31 +3,39 @@
   width: 280px;
   padding: 20px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.08); /* glass effect */
+  /* Use the themed card variables */
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  font-family: "Segoe UI", sans-serif;
-  color: #f1f1f1;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* Make shadow softer in light mode */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: var(--text-main);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
   margin-bottom: 16px;
+}
+
+html.dark .weatherCard {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 .weatherCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+  background: rgba(var(--accent-rgb), 0.05); /* Optional subtle tint */
 }
 
 /* Titles */
-.cityName, .subTitle {
+.cityName,
+.subTitle {
   margin: 0 0 12px 0;
   font-size: 22px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-main);
 }
 
 .subTitle {
   font-size: 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--card-border);
   padding-bottom: 8px;
 }
 
@@ -38,13 +46,14 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #fffae3;
+
+  color: var(--text-main);
 }
 
 .condition {
   font-size: 16px;
   font-weight: 500;
-  color: #cfcfcf;
+  color: var(--text-muted);
 }
 
 .condition img {
@@ -54,20 +63,12 @@
   height: 48px;
 }
 
-/* Unified Details Grid - Shared by Weather and Location */
-.weatherDetails,
-.locationDetails {
-  display: grid;
-  grid-template-columns: 1fr; /* Single column for better text fit */
-  gap: 10px;
-  margin-top: 12px;
-}
-
+/* Unified Details Grid */
 .weatherDetails p,
 .locationDetails p {
   margin: 0;
   font-size: 14px;
-  color: #cfcfcf; /* Secondary light text */
+  color: var(--text-muted);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -76,11 +77,11 @@
 .weatherDetails span,
 .locationDetails span {
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-main);
   text-align: right;
 }
 
-/* Optional: Subtle distinction for the second card if desired */
 .locationCard {
-  background: rgba(255, 255, 255, 0.05); 
+  background: var(--card-bg);
+  opacity: 0.9;
 }
